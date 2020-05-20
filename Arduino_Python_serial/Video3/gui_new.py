@@ -56,7 +56,7 @@ class BottomPanel(wx.Panel):
 		labelMaxY = wx.StaticText(self, -1, "Max Y", pos = (400, 60))
 		self.textboxMaxYAxis = wx.TextCtrl(self, -1, "1024", pos = (400,80))
 		
-		self.buttonRange = wx.Button(self, 01, "Set Y Axis", pos =(400,105))
+		self.buttonRange = wx.Button(self, -1, "Set Y Axis", pos =(400,105))
 		self.buttonRange.Bind(wx.EVT_BUTTON, self.SetButtonRange)
 
 		self.timer = wx.Timer(self)
