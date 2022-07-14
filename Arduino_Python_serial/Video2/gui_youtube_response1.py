@@ -4,7 +4,7 @@ from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 from matplotlib.figure import Figure
 import numpy as np
 
-
+data =[]
 
 class TopPanel(wx.Panel):
 	def __init__(self, parent):
@@ -18,11 +18,12 @@ class TopPanel(wx.Panel):
 		self.SetSizer(self.sizer)
 		self.axes.set_xlabel("Time")
 		self.axes.set_ylabel("A/D Counts")
-		
-	def draw(self):
-		x = np.arange(0,3,0.01)
-		y = np.sin(np.pi*x)
+
+    #LOOK AT THIS		
+	def draw(self, x, y):
+		self.axes.clear()
 		self.axes.plot(x,y)
+		self.canvas.draw()
 		
 	def changeAxes(self, min, max):
 		self.axes.set_ylim(float(min), float(max))
@@ -53,7 +54,7 @@ class BottomPanel(wx.Panel):
 		labelMaxY = wx.StaticText(self, -1, "Max Y", pos = (400, 60))
 		self.textboxMaxYAxis = wx.TextCtrl(self, -1, "1024", pos = (400,80))
 		
-		self.buttonRange = wx.Button(self, -1, "Set Y Axis", pos =(400,105))
+		self.buttonRange = wx.Button(self, 01, "Set Y Axis", pos =(400,105))
 		self.buttonRange.Bind(wx.EVT_BUTTON, self.SetButtonRange)
 		
 	def SetButtonRange(self, event):
@@ -65,12 +66,20 @@ class BottomPanel(wx.Panel):
 		val = self.textboxSampleTime.GetValue()
 		print(val)
 		
-		
+	#LOOK AT THIS 	
 	def OnChecked(self, event):
+		self.x = np.arange(0,3,0.01)
+		self.y = np.cos(np.pi*self.x)
+		self.graph.draw(self.x,self.y)
 		cb = event.GetEventObject()
 		print("%s is clicked" % (cb.GetLabel()))
 		
+	#LOOK AT THIS
 	def OnStartClick(self, event):
+		self.x = np.arange(0,3,0.01)
+		self.y = np.sin(np.pi*self.x)
+		self.graph.draw(self.x,self.y)
+
 		val = self.togglebuttonStart.GetValue()
 		if (val == True):
 			self.togglebuttonStart.SetLabel("Stop")
@@ -88,12 +97,7 @@ class Main(wx.Frame):
 		bottom = BottomPanel(splitter, top)
 		splitter.SplitHorizontally(top, bottom)
 		splitter.SetMinimumPaneSize(400)
-		top.draw()
-
-
-
-
-
+		top.draw([0],[0])
 
 
 
