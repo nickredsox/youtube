@@ -36,7 +36,7 @@ gray_scale = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY)
 t_stop = time.time()
 
 elapsed_time = t_stop-t_start
-print("It took " + str(elapsed_time) + "seconds")
+print("It took " + str(elapsed_time) + " seconds")
 
 #Section 3 - Displaying Images
 ax[0].imshow(im)
