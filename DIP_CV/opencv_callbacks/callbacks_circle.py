@@ -1,6 +1,6 @@
 import cv2
 
-def getXY(evt, x,y, flags, userdata ):
+def getXY(evt, x, y, flags, userdata ):
 	if evt == cv2.EVENT_LBUTTONDOWN:
 		print("X: " + str(x) + " Y: " + str(y))
 		value = im[y,x]
